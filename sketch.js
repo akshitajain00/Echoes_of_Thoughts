@@ -275,6 +275,7 @@ function scene5() {
   fill(0)
   textAlign(CENTER);
   textSize(20);
+  textFont(fontTitle);
   text("I am on the brink of a ground-breaking invention", 400, 100);
   button2.show();
   button2.position(650, 200);
