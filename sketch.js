@@ -21,6 +21,7 @@ let thing1;
 let thing2;
 
 function preload() {
+  fontTitle = loadFont('mystery-quest.regular.ttf');
   scene0bg = loadImage("ccgame1.png");
   scene1bg = loadImage("ccgame2.png");
   scene3bg = loadImage("ccgame3.png");
@@ -168,7 +169,7 @@ function draw() {
 function scene0() {
   background(scene0bg);
   fill('#4C3A6E');
-  textFont('Georgia', 30);
+  textFont(fontTitle, 40);
   textAlign(CENTER);
   text("Welcome to Echoes of Thoughts", 400, 200);
   button0.show();
