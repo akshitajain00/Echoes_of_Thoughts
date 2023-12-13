@@ -172,7 +172,7 @@ function scene0() {
   textAlign(CENTER);
   text("Welcome to Echoes of Thoughts", 400, 200);
   button0.show();
-  button0.position(740, 300);
+  button0.position(windowWidth/2, 300);
   button0.mousePressed(() => mode = 1);
   button1.hide();
   button2.hide();
