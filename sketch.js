@@ -172,7 +172,7 @@ function scene0() {
   textAlign(CENTER);
   text("Welcome to Echoes of Thoughts", 400, 200);
   button0.show();
-  button0.position(windowWidth/2, 300);
+  button0.position(windowWidth/2, windowHeight/2);
   button0.mousePressed(() => mode = 1);
   button1.hide();
   button2.hide();
@@ -212,7 +212,7 @@ function scene2() {
   textAlign(CENTER);
   text("You can read minds now!", 400, 200);
   button1.show();
-  button1.position(windowWidth/2, 300);
+  button1.position(windowWidth/2, windowHeight/2);
   button1.mousePressed(() => mode = 3);
   sprite.x = 300;
   sprite.y = 480;
