@@ -178,7 +178,7 @@ function scene0() {
   textAlign(CENTER);
   text("Welcome to Echoes of Thoughts", 400, 200);
   button0.show();
-  button0.position(windowWidth/2, windowHeight/2);
+  button0.position(windowWidth/2, 300);
   button0.mousePressed(() => mode = 1);
   button1.hide();
   button2.hide();
@@ -214,11 +214,11 @@ function scene1() {
 function scene2() {
   background(scene0bg);
   fill('#4C3A6E');
-  textFont('Georgia', 30);
+  textFont(fontTitle, 30);
   textAlign(CENTER);
   text("You can read minds now!", 400, 200);
   button1.show();
-  button1.position(windowWidth/2, windowHeight/2);
+  button1.position(windowWidth/2, 300);
   button1.mousePressed(() => mode = 3);
   sprite.x = 300;
   sprite.y = 480;
@@ -387,12 +387,13 @@ function scene10() {
   fill('#FFD0E0');
   textAlign(CENTER);
   textSize(20);
+  textFont(fontTitle);
   text("I must protect the Mystic Woods from tech", 400, 100);
   button4.show();
-  button4.position(650, 200);
+  button4.position((windowWidth/2)-100, 200);
   button4.mousePressed(() => mode = 11);
   button5.show();
-  button5.position(800, 200);
+  button5.position((windowWidth/2)+50, 200);
   button5.mousePressed(() => mode = 3);
 }
 // Mystic Woods Puzzle
@@ -449,12 +450,19 @@ let Walls = [
 
 //Woods Story Unravel
 function scene12() {
+  push();
   fill('#FFD0E0');
   background(scene9bg);
   textAlign(CENTER);
+  textSize(20);
   text("She was succesful in stopping magic", 400, 100);
   text("from merging with tech,", 400, 130);
   text("but the world will never experience it....", 400, 160);
+  pop();
+  fill(255);
+  textAlign(CENTER);
+  textSize(50);
+  text("The End", 400, 520);
 }
 // Mystic Woods Choices Impact
 //function scene13() {
@@ -485,10 +493,10 @@ function scene15() {
   textSize(20);
   text("Tech and magic could be powerful together, but it needs to be ethical", 400, 100);
   button6.show();
-  button6.position(650, 200);
+  button6.position((windowWidth/2)-100, 200);
   button6.mousePressed(() => mode = 16);
   button7.show();
-  button7.position(800, 200);
+  button7.position((windowWidth/2)+50, 200);
   button7.mousePressed(() => mode = 3);
 }
 //Enigma Council Puzzle
@@ -544,11 +552,18 @@ let Walls = [
 }
 //Enigma Council Story Unravel
 function scene17() {
+  push();
   background(scene14bg);
   fill(0);
+  textSize(20);
   textAlign(CENTER);
   text("She managed to ethically merge them,", 400, 100);
   text("now the world the can experience their power....", 400, 130);
+  pop();
+  fill(255);
+  textAlign(CENTER);
+  textSize(50);
+  text("The End", 400, 520);
 }
 //Enigma Council Choices Impact
 //function scene18() {
