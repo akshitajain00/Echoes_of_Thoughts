@@ -278,12 +278,12 @@ function scene5() {
   textFont(fontTitle);
   text("I am on the brink of a ground-breaking invention", 400, 100);
   button2.show();
-  button2.position(650, 200);
+  button2.position((windowWidth/2)-100, 200);
   button2.mousePressed(() => mode = 6);
   sprite.x = 200;
   sprite.y = 200;
   button3.show();
-  button3.position(800, 200);
+  button3.position((windowWidth/2)+50, 200);
   button3.mousePressed(() => mode = 3);
 
 }
@@ -342,11 +342,17 @@ let Walls = [
 // Mount Pixel Story Unravel
 function scene7() {
   background(scene4bg);
+  push();
   fill(0);
   textAlign(CENTER);
   textSize(20);
   text("His invention merged magic and technology,", 400, 100);
   text("which made him power hungry....", 400, 130);
+  pop();
+  fill(255);
+  textAlign(CENTER);
+  textSize(50);
+  text("The End", 400, 520);
 }
 // Mount Pixel Choices Impact
 //function scene8() {
