@@ -22,6 +22,7 @@ let thing2;
 
 function preload() {
   fontTitle = loadFont('mystery-quest.regular.ttf');
+  music = loadSound('Evening-Improvisation-with-Ethera(chosic.com).mp3');
   scene0bg = loadImage("ccgame1.png");
   scene1bg = loadImage("ccgame2.png");
   scene3bg = loadImage("ccgame3.png");
@@ -39,7 +40,11 @@ function preload() {
   thing1 = loadImage("amulet.png");
   thing2 = loadImage("mysterybox.png");
 }
-
+function mouseClicked() {
+  if (!music.isPlaying()) {
+    music.play(); // Start playing if it's not already playing
+  }
+}
  class Wall {
   constructor(x, y, width, height) {
     this.x = x;
