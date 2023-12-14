@@ -392,6 +392,8 @@ function scene10() {
   button4.show();
   button4.position((windowWidth/2)-100, 200);
   button4.mousePressed(() => mode = 11);
+  sprite.x = 200;
+  sprite.y = 200;
   button5.show();
   button5.position((windowWidth/2)+50, 200);
   button5.mousePressed(() => mode = 3);
@@ -495,6 +497,8 @@ function scene15() {
   button6.show();
   button6.position((windowWidth/2)-100, 200);
   button6.mousePressed(() => mode = 16);
+  sprite.x = 200;
+  sprite.y = 200;
   button7.show();
   button7.position((windowWidth/2)+50, 200);
   button7.mousePressed(() => mode = 3);
