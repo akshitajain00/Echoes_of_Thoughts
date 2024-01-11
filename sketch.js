@@ -218,7 +218,7 @@ function scene2() {
   textAlign(CENTER);
   text("You can read minds now!", 400, 200);
   button1.show();
-  button1.position(windowWidth/2, 300);
+  button1.position(windowWidth/2, 400);
   button1.mousePressed(() => mode = 3);
   sprite.x = 300;
   sprite.y = 480;
