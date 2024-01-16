@@ -6,6 +6,10 @@ class Sprite {
       this.size = size;
     }
   
+    position(x, y){
+      this.x = x;
+      this.y = y;
+    }
     
     
     move(){

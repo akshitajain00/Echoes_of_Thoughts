@@ -15,3 +15,11 @@ canvas {
   left: 0;
   right: 0;
 }
+
+.buttonStyle {
+  font-size: 18px;
+  color: #1f1934;
+  font-family: Georgia;
+  background-color: #C39EBA;
+  padding: 5px 12px;
+}

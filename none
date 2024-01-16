@@ -1,0 +1,620 @@
+//Ningxuan Zhang; Image as sprite
+// Soumya Karwa; Buttons
+
+
+let scene = "Intro";
+let sprite;
+let sceneIntrobg;
+let sceneCavebg;
+let sceneChooseAPlacebg;
+let sceneMountPixelbg;
+let sceneMysticWoodsbg;
+let sceneEngimabg;
+let sceneMysteryBoxbg;
+let character;
+let imgMountPixel;
+let imgMysticWoods;
+let imgEnigma;
+let characterdotcon;
+let characternixie;
+let characterharmony;
+let amulet;
+let mysterybox;
+
+class Wall {
+  constructor(x, y, width, height) {
+    this.x = x;
+    this.y = y;
+    this.img = mysterybox;
+  }
+   
+  displayWalls(){ 
+  fill(0);
+  image(this.img, this.x, this.y);
+  image(this.img, 50, 50);
+  image(this.img, 375, 50);
+  image(this.img, 700, 50);
+  image(this.img, 50, 530); 
+  image(this.img, 375, 530);   
+  }
+ }
+
+
+function preload() {
+  fontTitle = loadFont('mystery-quest.regular.ttf');
+  music = loadSound('Evening-Improvisation-with-Ethera(chosic.com).mp3');
+
+  sceneIntrobg = loadImage("bgIntro.png");
+  sceneCavebg = loadImage("bgCave.png");
+  sceneChooseAPlacebg = loadImage("bgChooseAPlace.png");
+  sceneMountPixelbg = loadImage("bgMountPixel.png");
+  sceneMysticWoodsbg = loadImage("bgMysticWoods.png");
+  sceneEnigmabg = loadImage("bgEnigma.png");
+  sceneMysteryBoxbg = loadImage("bgMysteryBox.png");
+  character = loadImage("character.png");
+
+  imgMountPixel = loadImage("mountpixel.png");
+  imgEnigma = loadImage("enigmacouncil.png");
+  imgMysticWoods = loadImage("mysticwoods.png");
+  characterdotcon = loadImage("dotcon.png");
+  characternixie = loadImage("nixie.png");
+  characterharmony = loadImage("harmony.png");
+
+  amulet = loadImage("amulet.png");
+  mysterybox = loadImage("mysterybox.png");
+}
+
+function mouseClicked() {
+  if (!music.isPlaying()) {
+    music.play(); // Start playing if it's not already playing
+  }
+}
+
+
+//Sprite Position Calculations
+function filterScene(whichScene) {
+  switch(whichScene) {
+    case "ReadMinds":
+      return sprite.x > 650;
+    case "MountPixel":
+      return sprite.x > 620 && sprite.y > 420 && sprite.x < 750 && sprite.y < 550;
+    case "MysticWoods":
+      return sprite.x > 60 && sprite.y > 420 && sprite.x < 110 && sprite.y < 550;
+    case "Enigma":
+      return sprite.x > 320 && sprite.y > 220 && sprite.x < 380 && sprite.y < 350;
+    case "MPOptions":
+      return sprite.x > 650 && sprite.y > 350;
+    case "MPStory":
+      return sprite.x > 600 && sprite.y > 400 && sprite.x < 750 && sprite.y < 420;
+    case "MWOptions":
+      return sprite.x > 650 && sprite.y > 350;
+    case "MWStory":
+      return sprite.x > 600 && sprite.y > 400 && sprite.x < 750 && sprite.y < 420;
+    case "ECOptions":
+      return sprite.x > 650 && sprite.y > 350;
+    case "ECStory":
+      return sprite.x > 600 && sprite.y > 400 && sprite.x < 750 && sprite.y < 420;
+    default: true;
+  }
+}
+
+function hideButtons() {
+  buttonPlay.hide();
+  buttonProceed.hide();
+  buttonFom.hide();
+  buttonGoback.hide();
+}
+
+function showButton(button, nextScene) {
+  switch(button){
+    case "play":
+      buttonPlay.show();
+      buttonPlay.position((windowWidth/2), 350);
+      buttonPlay.mousePressed(() => scene = nextScene);
+    case "proceed":
+      buttonProceed.show();
+      buttonProceed.position((windowWidth/2), 350);
+      buttonProceed.mousePressed(() => scene = nextScene);
+    case "findoutmore":
+      buttonFom.show();
+      buttonFom.position((windowWidth/2)-100, 250);
+      buttonFom.mousePressed(() => scene = nextScene);
+    case "goback":
+      buttonGoback.show();  
+      buttonGoback.position((windowWidth/2)+50, 250);
+      buttonGoback.mousePressed(() => scene = nextScene);
+  }
+}
+
+
+function setup() {
+  createCanvas(800, 600);
+  sprite = new Sprite(200,200,100,character);
+  //buttons
+  let col = color('#C39EBA');
+  buttonPlay = createButton('Play');
+  buttonPlay.style('font-size', '18px', 'color', '#7D6EA9');
+  buttonPlay.style('font-family', 'Georgia'); 
+  buttonPlay.style('background-color', col);
+  buttonPlay.size(60, 35); 
+  
+  buttonProceed = createButton('Proceed');
+  buttonProceed.style('font-size', '18px', 'color', '#7D6EA9');
+  buttonProceed.style('font-family', 'Georgia'); 
+  buttonProceed.style('background-color', col);
+  buttonProceed.size(80, 35); 
+  
+  buttonFom = createButton('Find Out More');
+  buttonFom.style('font-family', 'Georgia'); 
+  buttonFom.style('background-color', col);
+
+  buttonGoback = createButton('Go back');
+  buttonGoback.style('font-family', 'Georgia'); 
+  buttonGoback.style('background-color', col);
+}
+
+function draw() {
+  window["scene".concat(scene)]();
+}
+
+// function draw1() {
+//   switch (scene) {
+//     case "Intro":
+//       sceneIntro();// The Introduction
+//       break;
+//     case "Cave":
+//       sceneCave();//Finding the amulet in the magical cave
+//       break;
+//     case "ReadMinds":
+//       sceneReadMinds();//What does the amulet do?
+//       break;
+//     case "ChooseAPlace":
+//       sceneChooseAPlace();//Choose the place
+//       break;
+//     case "MountPixel":
+//       sceneMountPixel(); //Mount Pixel
+//       break;
+//     case "MPOptions":
+//       sceneMPOptions();//Mount Pixel Options
+//       break;
+//     case "MPPuzzle":
+//       sceneMPPuzzle();//Mount Pixel Puzzle
+//       break;
+//     case "MPStory":
+//       sceneMPStory();//Mount Pixel Story Unravel
+//       break;
+//     case "MPImpact":
+//       sceneMPImpact();//Mount Pixel Choices Impact
+//       break;
+//     case "MysticWoods":
+//       sceneMysticWoods();//Mystic Woods
+//       break;
+//     case "MWOptions":
+//       sceneMWOptions();//Mystic Woods Options
+//       break;
+//     case "MWPuzzle":
+//       sceneMWPuzzle();//Mystic Woods Puzzle
+//       break;
+//     case "MWStory":
+//       sceneMWStory();//Mystic Woods Story Unravel
+//       break;
+//     case "MWImpact":
+//       sceneMWImpact();//Mystic Woods Choices Impact
+//       break;
+//     case "Enigma":
+//       sceneEnigma();//Enigma Council
+//       break;
+//     case "ECOptions":
+//       sceneECOptions();//Enigma Council Options
+//       break;
+//     case "ECPuzzle":
+//       sceneECPuzzle();//Enigma Council Puzzle
+//       break;
+//     case "ECStory":
+//       sceneECStory();//Enigma Council Story Unravel
+//       break;
+//     case "ECImpact":
+//       sceneECImpact();//Enigma Council Choices Impact
+//       break;
+//   }
+// }
+
+
+function sceneIntro() {
+  background(sceneIntrobg);
+  fill('#4C3A6E');
+  textFont(fontTitle, 40);
+  textAlign(CENTER);
+  text("Welcome to Echoes of Thoughts", 400, 200);
+  hideButtons();
+  buttonPlay.show();
+  buttonPlay.position(windowWidth/2, 350);
+  buttonPlay.mousePressed(() => scene = "Cave");
+}
+
+function sceneCave() {
+  background(sceneCavebg);
+  //text("Walk towards the box", 300, 250);
+  //text("PICK ME", 330, 350);
+  image(amulet, 720, 550);
+  hideButtons();
+  
+  if (scene == "Cave" && sprite.x > 800) {
+    sprite.x = 0;
+  }
+  sprite.x = constrain(sprite.x, 30, 760);
+  sprite.y = constrain(sprite.y, 500, 500);
+
+  sprite.move();
+  sprite.display();
+
+  // Transition to the next mode when the sprite reaches a certain position
+  if (filterScene("ReadMinds")) {
+    scene = "ReadMinds";
+  }
+}
+
+function sceneReadMinds() {
+  background(sceneIntrobg);
+  fill('#4C3A6E');
+  textFont(fontTitle, 30);
+  textAlign(CENTER);
+  text("You can read minds now!", 400, 200);
+  hideButtons();
+  buttonProceed.show();
+  buttonProceed.position(windowWidth/2, 350);
+  buttonProceed.mousePressed(() => scene = "ChooseAPlace");
+  sprite.x = 300;
+  sprite.y = 480;
+}
+
+function sceneChooseAPlace() {
+  background(sceneChooseAPlacebg);
+  hideButtons();
+  image(imgMountPixel, 650, 450);
+  image(imgMysticWoods, 30, 450);
+  image(imgEnigma, 350, 250);
+
+  sprite.move();
+  sprite.display();
+  sprite.x = constrain(sprite.x, 30, 700);
+  sprite.y = constrain(sprite.y, 250, 500);
+
+  if (filterScene("MountPixel")) {
+    scene = "MountPixel";
+    sprite.x = 30;
+    sprite.y = 500;
+  }
+     if (filterScene("MysticWoods")) {
+    scene = "MysticWoods";
+    sprite.x = 30;
+    sprite.y = 500;
+  }
+  if (filterScene("Enigma")) {
+    scene = "Enigma";
+    sprite.x = 30;
+    sprite.y = 500;
+  }
+}
+
+//Mount Pixel 
+function sceneMountPixel() {
+  background(sceneMountPixelbg);
+
+  image(characterdotcon, 700, 500);
+
+  sprite.move();
+  sprite.display(); 
+  
+  sprite.x = constrain(sprite.x, 30, 760);
+  sprite.y = constrain(sprite.y, 500, 500);
+  
+  if (filterScene("MPOptions")) {
+    scene = "MPOptions";
+  }
+}
+
+
+// Mount Pixel Options
+function sceneMPOptions() {
+  background(sceneMountPixelbg);
+  fill(0)
+  textAlign(CENTER);
+  textSize(20);
+  textFont(fontTitle);
+  text("I am on the brink of a ground-breaking invention", 400, 100);
+  hideButtons();
+  showButton("findoutmore", "MPPuzzle");
+  sprite.x = 200;
+  sprite.y = 200;
+  showButton("goback", "ChooseAPlace");
+}
+
+// Mount Pixel Puzzle
+function sceneMPPuzzle() {
+  hideButtons();
+  background(sceneMysteryBoxbg);
+
+   //The wall to take you to the next level
+   image(mysterybox, 700, 530); 
+
+  let walls = [
+  new Wall(50, 50, 50, 50),
+  new Wall(375, 50, 50, 50),
+  new Wall(700, 50, 50, 50),
+  new Wall(50, 530, 50, 50),
+  new Wall(375, 530, 50, 50),
+];
+  
+  // Move the sprite
+  sprite.move();
+  // Display the sprite
+  sprite.display();
+  
+  //Contrain the sprite to a particular area
+  sprite.x = constrain(sprite.x, 50, 750);
+  sprite.y = constrain(sprite.y, 100, 420);
+  
+  // Transition to the next mode when the sprite reaches a certain position
+  if (filterScene("MPStory")) {
+    scene = "MPStory";
+  }
+  
+  // Check collision with maze walls
+  for (let i = 0; i < walls.length; i++) {
+    walls[i].displayWalls();
+    if (collideRectRect(sprite.x, sprite.y, sprite.size, sprite.size, walls[i].x, walls[i].y, walls[i].img)) {
+      // If collision occurs, reset the sprite's position
+      sprite.x = 200;
+      sprite.y = 200;
+    }
+  }
+    // Walls array
+let Walls = [
+  { x: 50, y: 50, width: 50, height: 50 },
+  { x: 375, y: 50, width: 50, height: 50 },
+  { x: 700, y: 50, width: 50, height: 50 },
+  { x: 50, y: 530, width: 50, height: 50 },
+  { x: 375, y: 530, width: 50, height: 50 },
+];
+}
+
+
+
+// Mount Pixel Story Unravel
+function sceneMPStory() {
+  background(sceneMountPixelbg);
+  push();
+  fill(0);
+  textAlign(CENTER);
+  textSize(20);
+  text("His invention merged magic and technology,", 400, 100);
+  text("which made him power hungry....", 400, 130);
+  pop();
+  fill(255);
+  textAlign(CENTER);
+  textSize(50);
+  text("The End", 400, 520);
+}
+
+// Mount Pixel Choices Impact
+//function scene8() {
+ // background(0);
+  //stroke(255);
+  //text("BACK TO REALITY", 200, 200);
+//}
+
+// Mystic Woods
+
+function sceneMysticWoods() {
+  background(sceneMysticWoodsbg);
+  image(characternixie, 700, 500);
+
+  sprite.display();
+  sprite.move();
+
+  sprite.x = constrain(sprite.x, 30, 760);
+  sprite.y = constrain(sprite.y, 500, 500);
+  
+  if (filterScene("MWOptions")) {
+    scene = "MWOptions";
+  }
+}
+
+// Mystic Woods Options
+function sceneMWOptions() {
+  background(sceneMysticWoodsbg);
+  fill('#FFD0E0');
+  textAlign(CENTER);
+  textSize(20);
+  textFont(fontTitle);
+  text("I must protect the Mystic Woods from tech", 400, 100);
+  hideButtons();
+  buttonFom.show();
+  buttonFom.position((windowWidth/2)-100, 200);
+  buttonFom.mousePressed(() => scene = "MWPuzzle");
+  sprite.x = 200;
+  sprite.y = 200;
+  buttonGoback.show();
+  buttonGoback.position((windowWidth/2)+50, 200);
+  buttonGoback.mousePressed(() => scene = "ChooseAPlace");
+}
+
+// Mystic Woods Puzzle
+function sceneMWPuzzle() {
+  hideButtons();
+  background(sceneMysteryBoxbg);
+
+   //The wall to take you to the next level
+   image(mysterybox, 700, 530); 
+
+  let walls = [
+  new Wall(50, 50, 50, 50),
+  new Wall(375, 50, 50, 50),
+  new Wall(700, 50, 50, 50),
+  new Wall(50, 530, 50, 50),
+  new Wall(375, 530, 50, 50),
+];
+  
+  // Move the sprite
+  sprite.move();
+  // Display the sprite
+  sprite.display();
+  
+  //Contrain the sprite to a particular area
+  sprite.x = constrain(sprite.x, 50, 750);
+  sprite.y = constrain(sprite.y, 100, 420);
+  
+  // Transition to the next mode when the sprite reaches a certain position
+  if (filterScene("MWStory") ) {
+    scene = "MWStory";
+  }
+  
+  // Check collision with maze walls
+  for (let i = 0; i < walls.length; i++) {
+    walls[i].displayWalls();
+    if (collideRectRect(sprite.x, sprite.y, sprite.size, sprite.size, walls[i].x, walls[i].y, walls[i].img)) {
+      // If collision occurs, reset the sprite's position
+      sprite.x = 200;
+      sprite.y = 200;
+    }
+  }
+    // Walls array
+let Walls = [
+  { x: 50, y: 50, width: 50, height: 50 },
+  { x: 375, y: 50, width: 50, height: 50 },
+  { x: 700, y: 50, width: 50, height: 50 },
+  { x: 50, y: 530, width: 50, height: 50 },
+  { x: 375, y: 530, width: 50, height: 50 },
+];
+}
+
+//Woods Story Unravel
+function sceneMWStory() {
+  push();
+  fill('#FFD0E0');
+  background(sceneMysticWoodsbg);
+  textAlign(CENTER);
+  textSize(20);
+  text("She was succesful in stopping magic", 400, 100);
+  text("from merging with tech,", 400, 130);
+  text("but the world will never experience it....", 400, 160);
+  pop();
+  fill(255);
+  textAlign(CENTER);
+  textSize(50);
+  text("The End", 400, 520);
+}
+// Mystic Woods Choices Impact
+//function scene13() {
+  //background(0);
+  //stroke(255);
+  //text("BACK TO REALITY", 200, 200);
+//}
+// Enigma Council
+
+function sceneEnigma() {
+  background(sceneEnigmabg);
+  image(characterharmony, 700, 500);
+
+  sprite.move();
+  sprite.display();
+
+  sprite.x = constrain(sprite.x, 30, 760);
+  sprite.y = constrain(sprite.y, 500, 500);
+
+  if (filterScene("ECOptions")) {
+    scene = "ECOptions";
+  }
+}
+
+//Enigma Council Choices
+function sceneECOptions() {
+  background(sceneEnigmabg);
+  fill(0);
+  textAlign(CENTER);
+  textSize(20);
+  text("Tech and magic could be powerful together, but it needs to be ethical", 400, 100);
+  hideButtons();
+  buttonFom.show();
+  buttonFom.position((windowWidth/2)-100, 200);
+  buttonFom.mousePressed(() => scene = "ECPuzzle");
+  sprite.x = 200;
+  sprite.y = 200;
+  buttonGoback.show();
+  buttonGoback.position((windowWidth/2)+50, 200);
+  buttonGoback.mousePressed(() => scene = "ChooseAPlace");
+}
+
+//Enigma Council Puzzle
+function sceneECPuzzle() {
+  hideButtons();
+  background(sceneMysteryBoxbg);
+
+   //The wall to take you to the next level
+   image(mysterybox, 700, 530); 
+
+  let walls = [
+  new Wall(50, 50, 50, 50),
+  new Wall(375, 50, 50, 50),
+  new Wall(700, 50, 50, 50),
+  new Wall(50, 530, 50, 50),
+  new Wall(375, 530, 50, 50),
+];
+  
+  // Move the sprite
+  sprite.move();
+  // Display the sprite
+  sprite.display();
+  
+  //Contrain the sprite to a particular area
+  sprite.x = constrain(sprite.x, 50, 750);
+  sprite.y = constrain(sprite.y, 100, 420);
+  
+  // Transition to the next mode when the sprite reaches a certain position
+  if (filterScene("ECStory") ) {
+    scene = "ECStory";
+  }
+
+  // Check collision with maze walls
+  for (let i = 0; i < walls.length; i++) {
+    walls[i].displayWalls();
+    if (collideRectRect(sprite.x, sprite.y, sprite.size, sprite.size, walls[i].x, walls[i].y, walls[i].img)) {
+      // If collision occurs, reset the sprite's position
+      sprite.x = 200;
+      sprite.y = 200;
+    }
+  }
+    // Walls array
+let Walls = [
+  { x: 50, y: 50, width: 50, height: 50 },
+  { x: 375, y: 50, width: 50, height: 50 },
+  { x: 700, y: 50, width: 50, height: 50 },
+  { x: 50, y: 530, width: 50, height: 50 },
+  { x: 375, y: 530, width: 50, height: 50 },
+];
+}
+
+//Enigma Council Story Unravel
+function sceneECStory() {
+  push();
+  background(sceneEnigmabg);
+  fill(0);
+  textSize(20);
+  textAlign(CENTER);
+  text("She managed to ethically merge them,", 400, 100);
+  text("now the world the can experience their power....", 400, 130);
+  pop();
+  fill(255);
+  textAlign(CENTER);
+  textSize(50);
+  text("The End", 400, 520);
+}
+
+//Enigma Council Choices Impact
+//function scene18() {
+ // background(0);
+ // stroke(255);
+ // text("BACK TO REALITY", 200, 200);
+//}
+
