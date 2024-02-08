@@ -4,7 +4,7 @@ function sceneIntro() {
   
     textFont(fontTitle, 40);
     textAlign(CENTER);
-    text("Welcome to Echoes of Thoughts", 400, 200);
+    text("Echoes of Thoughts", 400, 200);
   
     hideButtons();
     showButton("play", "Cave");
